@@ -1,10 +1,10 @@
 import { IngresoEgreso } from './../ingreso.egreso.model';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { AppState } from '../../app.reducer';
 import { Subscription } from 'rxjs';
 import { IngresoEgresoService } from '../ingreso-egreso.service';
 import Swal from 'sweetalert2';
+import { AppState } from '../ingreso-egreso.reducer';
 
 @Component({
   selector: 'app-detalle',

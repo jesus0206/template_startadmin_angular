@@ -4,9 +4,8 @@ import { IngresosEgresoComponent } from '../ingresos-egreso/ingresos-egreso.comp
 import { DetalleComponent } from '../ingresos-egreso/detalle/detalle.component';
 
 
-
-export const dashboardRoutes:Routes=[
-  {path:'',component:EstadisticaComponent},
-  {path:'ingreso-egreso',component:IngresosEgresoComponent},
-  {path:'detalle',component:DetalleComponent}
+export const dashboardRoutes: Routes = [
+  { path: '', component: EstadisticaComponent },
+  { path: 'ingreso-egreso', component: IngresosEgresoComponent },
+  { path: 'detalle', component: DetalleComponent }
 ]
