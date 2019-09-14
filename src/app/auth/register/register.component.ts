@@ -12,14 +12,13 @@ import { Subscription } from 'rxjs';
 export class RegisterComponent implements OnInit, OnDestroy {
 
   cargando: boolean
-  subcription: Subscription;
+  subcription: Subscription = new Subscription();
 
   constructor(
     private authService: AuthService,
     private store: Store<AppState>) { }
 
   ngOnInit() {
-    console.log('OnInit Register');
     this.subcription = this.store.select('ui').subscribe(ui => this.cargando = ui.isLoading)
   }
 
@@ -28,7 +27,6 @@ export class RegisterComponent implements OnInit, OnDestroy {
   }
 
   onSubmit(data: any) {
-    console.log(data);
     this.authService.crearUsuario(data.nombre, data.email, data.password);
   }
 

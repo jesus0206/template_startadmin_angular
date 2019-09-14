@@ -10,13 +10,14 @@ import { Store } from '@ngrx/store';
 import { AppState } from '../app.reducer';
 import { ActivarLoadingAction, DesactivarLoadingAction } from '../shared/ui.accions';
 import { Subscription } from 'rxjs';
-import { SetUserAction } from './auth.actions';
+import { SetUserAction, UnsetUserAction } from './auth.actions';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
+  private usuario: User;
   private userSubscription: Subscription = new Subscription()
 
   constructor(
@@ -32,10 +33,11 @@ export class AuthService {
           .subscribe((obj: IUser) => {
             const newUser = new User(obj);
             this.store.dispatch(new SetUserAction(newUser))
-            console.log(obj);
+            this.usuario = newUser;
           })
       } else {
         this.userSubscription.unsubscribe()
+        this.usuario = null
       }
     })
   }
@@ -88,6 +90,8 @@ export class AuthService {
 
   logout() {
     this.afAuth.auth.signOut()
+    this.store.dispatch(new UnsetUserAction())
+    // this.ingresoEgresoService.cancelarSubcripcion()
     this.route.navigate(['login'])
   }
   isAuth() {
@@ -100,5 +104,8 @@ export class AuthService {
           return fbuser != null
         })
       )
+  }
+  getUsuario() {
+    return { ...this.usuario }
   }
 }
